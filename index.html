@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firely.ai - AI Sales Agents That Never Sleep</title>
+    <meta name="description" content="Revolutionary AI call agents that validate leads and close deals 24/7. Built on NEPQ philosophy for maximum sales velocity.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Firely.ai</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact" class="cta-button">Get Started</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    AI Sales Agents That 
+                    <span class="gradient-text">Never Sleep</span>
+                </h1>
+                <p class="hero-subtitle">
+                    The moment a lead fills out your form, our AI agent calls them instantly. 
+                    Validates prospects, books appointments, and closes deals 24/7. 
+                    Built on NEPQ philosophy for maximum sales velocity.
+                </p>
+                <div class="hero-cta">
+                    <button class="primary-button" onclick="scrollToForm()">
+                        <i class="fas fa-fire"></i>
+                        See If We Can Close You
+                    </button>
+                    <p class="cta-note">Fill out the form below to experience our AI in action</p>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="call-animation">
+                                <i class="fas fa-phone"></i>
+                                <div class="pulse-ring"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Firely.ai Closes More Deals</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Response</h3>
+                    <p>AI calls prospects within seconds of form submission, not hours or days later.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Smart Validation</h3>
+                    <p>Advanced qualification ensures only high-intent prospects reach your closers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Auto-Booking</h3>
+                    <p>Seamlessly schedules appointments with your best closers when prospects are hot.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Self-Closing</h3>
+                    <p>Handles lower-ticket sales automatically, maximizing your revenue potential.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Firely.ai Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Lead Submits Form</h3>
+                    <p>Prospect fills out your website form or landing page</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Calls Instantly</h3>
+                    <p>Our agent calls within seconds, not hours or days</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Validates & Closes</h3>
+                    <p>Qualifies prospects and either books appointments or closes deals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Form Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to See Firely.ai in Action?</h2>
+                <p>Fill out this form and our AI will call you to demonstrate its capabilities</p>
+                <form class="cta-form" id="demoForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="company" name="company" required>
+                            <option value="">Company Size</option>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="200+">200+ employees</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="primary-button">
+                        <i class="fas fa-fire"></i>
+                        Get AI Demo Call
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Firely.ai</h3>
+                    <p>AI Sales Agents That Never Sleep</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Firely.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

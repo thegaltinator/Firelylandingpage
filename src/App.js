@@ -7,25 +7,45 @@ import {
   DollarSign, 
   Phone, 
   ArrowRight, 
-  Flame,
-  CheckCircle
+  CheckCircle,
+  AlertCircle,
+  X
 } from 'lucide-react';
+import { submitToAirtable } from './utils/airtable';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     company: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const result = await submitToAirtable(formData);
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        console.log('Successfully submitted to Airtable:', result.recordId);
+      } else {
+        setSubmitError(typeof result.error === 'string' ? result.error : 'Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      setSubmitError('Failed to submit form. Please try again.');
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -81,7 +101,10 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-white overflow-x-hidden relative">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary-900/10 via-accent-900/10 to-primary-900/10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.1),transparent_50%)]"></div>
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-effect">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,13 +114,15 @@ function App() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center"
             >
-              <h2 className="text-2xl font-bold gradient-text">Firely.ai</h2>
+              <h2 className="text-2xl font-bold">
+                Firely<span className="text-primary-400">.ai</span>
+              </h2>
             </motion.div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="hover:text-primary-400 transition-colors">Features</a>
-              <a href="#how-it-works" className="hover:text-primary-400 transition-colors">How It Works</a>
-              <a href="#pricing" className="hover:text-primary-400 transition-colors">Pricing</a>
+              <a href="#features" className="hover:text-primary-400 transition-all duration-300 font-medium">Features</a>
+              <a href="#how-it-works" className="hover:text-primary-400 transition-all duration-300 font-medium">How It Works</a>
+              <a href="#pricing" className="hover:text-primary-400 transition-all duration-300 font-medium">Pricing</a>
               <button onClick={scrollToForm} className="button-primary">
                 Get Started
               </button>
@@ -150,14 +175,15 @@ function App() {
                 AI Sales Agents That 
                 <span className="block gradient-text">Never Sleep</span>
               </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                The moment a lead fills out your form, our AI agent calls them instantly. 
-                Validates prospects, books appointments, and closes deals 24/7. 
-                Built on NEPQ philosophy for maximum sales velocity.
-              </p>
+                              <p className="text-xl text-gray-300 leading-relaxed">
+                  AI sales team that works 24/7 like they got a fire under their ass.
+                  The moment a lead fills out your form, our AI agent calls them instantly. 
+                  Validates prospects, books appointments, and closes deals. 
+                  Built on NEPQ philosophy for maximum sales velocity.
+                </p>
               <div className="space-y-4">
                 <button onClick={scrollToForm} className="button-primary text-lg px-10 py-4">
-                  <Flame className="w-6 h-6 inline mr-2" />
+                  <Phone className="w-6 h-6 inline mr-2" />
                   See If We Can Close You
                 </button>
                 <p className="text-gray-400 text-sm">Fill out the form below to experience our AI in action</p>
@@ -170,28 +196,103 @@ function App() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative w-full max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-r from-fire-500/20 to-primary-500/20 rounded-3xl blur-3xl"></div>
-                <div className="relative bg-gradient-to-br from-dark-700 to-dark-800 rounded-3xl p-8 border border-gray-700">
-                  <div className="flex items-center justify-center h-64">
-                    <motion.div 
-                      animate={{ 
-                        scale: [1, 1.1, 1],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      transition={{ 
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="relative"
-                    >
-                      <Phone className="w-16 h-16 text-fire-500" />
-                      <div className="absolute inset-0 bg-fire-500/20 rounded-full animate-pulse-slow"></div>
-                    </motion.div>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-gray-300">AI Agent Calling...</p>
+              <div className="relative w-full max-w-sm mx-auto">
+                {/* Phone Screen Mockup */}
+                <div className="relative">
+                  {/* Phone Frame */}
+                  <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-2 shadow-2xl">
+                    <div className="bg-black rounded-[2.5rem] overflow-hidden">
+                      {/* Screen Content */}
+                      <div className="bg-gradient-to-b from-dark-800 to-dark-900 h-[400px] flex flex-col justify-between p-6">
+                        
+                        {/* Top Status Bar */}
+                        <div className="flex justify-between items-center text-white text-sm">
+                          <span>9:41</span>
+                          <div className="flex space-x-1">
+                            <div className="w-4 h-2 bg-white rounded-sm"></div>
+                            <div className="w-4 h-2 bg-white rounded-sm"></div>
+                            <div className="w-4 h-2 bg-white rounded-sm"></div>
+                          </div>
+                        </div>
+
+                        {/* Incoming Call UI */}
+                        <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+                          <p className="text-white text-sm opacity-75">Incoming call</p>
+                          
+                          {/* Avatar */}
+                          <div className="relative">
+                            <div className="w-24 h-24 bg-gradient-to-br from-primary-400 to-accent-500 rounded-full flex items-center justify-center">
+                              <span className="text-white text-2xl font-bold">AI</span>
+                            </div>
+                            {/* Pulsing rings */}
+                            {[1, 2, 3].map((i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute inset-0 border-2 border-primary-400 rounded-full"
+                                animate={{
+                                  scale: [1, 2, 2.5],
+                                  opacity: [0.6, 0.3, 0]
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  delay: i * 0.4,
+                                }}
+                              />
+                            ))}
+                          </div>
+
+                          <div className="text-center">
+                            <h3 className="text-white text-xl font-semibold">Firely AI Agent</h3>
+                            <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
+                          </div>
+
+                          {/* Sound Wave Visualization */}
+                          <div className="flex items-center justify-center space-x-1">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                              <motion.div
+                                key={i}
+                                className="w-1 bg-gradient-to-t from-primary-400 to-accent-500 rounded-full"
+                                style={{ height: '20px' }}
+                                animate={{
+                                  scaleY: [0.3, 1, 0.3],
+                                  opacity: [0.4, 1, 0.4]
+                                }}
+                                transition={{
+                                  duration: 1.2,
+                                  repeat: Infinity,
+                                  delay: i * 0.1,
+                                  ease: "easeInOut"
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Call Action Buttons */}
+                        <div className="flex justify-center space-x-12">
+                          <motion.div 
+                            className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center"
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <X className="w-8 h-8 text-white" />
+                          </motion.div>
+                          <motion.div 
+                            className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center"
+                            whileTap={{ scale: 0.95 }}
+                            animate={{
+                              scale: [1, 1.1, 1],
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                            }}
+                          >
+                            <Phone className="w-8 h-8 text-white" />
+                          </motion.div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -223,15 +324,19 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-dark-700/50 to-dark-800/50 rounded-2xl p-8 border border-gray-700/50 card-hover"
+                className="bg-gradient-to-br from-dark-700/30 via-dark-800/30 to-dark-900/30 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl card-hover relative overflow-hidden group"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-fire-500 to-primary-500 rounded-xl flex items-center justify-center mb-6">
-                  <div className="text-white">
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-400 via-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-accent-400/50 to-transparent"></div>
+                  <div className="text-white relative z-10">
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-4 relative z-10">{feature.title}</h3>
+                <p className="text-gray-300 relative z-10">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -263,7 +368,7 @@ function App() {
                   viewport={{ once: true }}
                   className="text-center max-w-xs"
                 >
-                  <div className="w-20 h-20 bg-gradient-to-r from-fire-500 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
                     <span className="text-2xl font-bold text-white">{step.number}</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
@@ -310,22 +415,45 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-dark-700/50 to-dark-800/50 rounded-3xl p-8 lg:p-12 border border-gray-700/50"
+            className="bg-gradient-to-br from-dark-700/30 to-dark-800/30 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 shadow-2xl"
           >
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center space-x-3"
+                  >
+                    <AlertCircle className="w-5 h-5 text-red-400" />
+                    <p className="text-red-300">{submitError}</p>
+                  </motion.div>
+                )}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <input
                       type="text"
-                      name="name"
-                      value={formData.name}
+                      name="firstName"
+                      value={formData.firstName}
                       onChange={handleInputChange}
-                      placeholder="Your Name"
+                      placeholder="First Name"
                       required
-                      className="w-full bg-dark-600/50 border border-gray-600 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors"
+                      className="w-full bg-dark-700/30 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300"
                     />
                   </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      placeholder="Last Name"
+                      required
+                      className="w-full bg-dark-700/30 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <input
                       type="email"
@@ -334,41 +462,56 @@ function App() {
                       onChange={handleInputChange}
                       placeholder="Your Email"
                       required
-                      className="w-full bg-dark-600/50 border border-gray-600 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors"
+                      className="w-full bg-dark-700/30 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300"
                     />
                   </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <input
                       type="tel"
-                      name="phone"
-                      value={formData.phone}
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
                       onChange={handleInputChange}
-                      placeholder="Your Phone Number"
+                      placeholder="Phone Number"
                       required
-                      className="w-full bg-dark-600/50 border border-gray-600 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors"
+                      className="w-full bg-dark-700/30 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300"
                     />
                   </div>
-                  <div>
-                    <select
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full bg-dark-600/50 border border-gray-600 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-primary-500 transition-colors"
-                    >
-                      <option value="">Company Size</option>
-                      <option value="1-10">1-10 employees</option>
-                      <option value="11-50">11-50 employees</option>
-                      <option value="51-200">51-200 employees</option>
-                      <option value="200+">200+ employees</option>
-                    </select>
-                  </div>
                 </div>
-                <button type="submit" className="button-primary w-full text-lg py-4">
-                  <Flame className="w-6 h-6 inline mr-2" />
-                  Get AI Demo Call
+                <div>
+                  <select
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-dark-700/30 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300"
+                  >
+                    <option value="">Company Size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="200+">200+ employees</option>
+                  </select>
+                </div>
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="button-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-6 h-6 inline mr-2 border-2 border-white border-t-transparent rounded-full"
+                      />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Phone className="w-6 h-6 inline mr-2" />
+                      Get AI Demo Call
+                    </>
+                  )}
                 </button>
               </form>
             ) : (
@@ -385,7 +528,8 @@ function App() {
                 <button
                   onClick={() => {
                     setIsSubmitted(false);
-                    setFormData({ name: '', email: '', phone: '', company: '' });
+                    setSubmitError(null);
+                    setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '', company: '' });
                   }}
                   className="button-primary"
                 >
@@ -402,7 +546,9 @@ function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold gradient-text mb-2">Firely.ai</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                Firely<span className="text-primary-400">.ai</span>
+              </h3>
               <p className="text-gray-400">AI Sales Agents That Never Sleep</p>
             </div>
             <div className="flex space-x-8">

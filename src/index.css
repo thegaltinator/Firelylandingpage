@@ -16,18 +16,22 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-fire-500 via-primary-500 to-fire-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-400 via-accent-500 to-primary-600 bg-clip-text text-transparent;
   }
   
   .glass-effect {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl;
   }
   
   .button-primary {
-    @apply bg-gradient-to-r from-fire-500 to-primary-500 hover:from-fire-600 hover:to-primary-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md;
+    @apply bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 hover:from-primary-600 hover:via-accent-600 hover:to-primary-700 text-white font-semibold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-xl;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl;
+    @apply transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:-translate-y-2;
+  }
+
+  .sound-wave {
+    @apply bg-gradient-to-r from-primary-400 to-accent-500;
   }
 } 

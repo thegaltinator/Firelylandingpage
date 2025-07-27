@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Zap, 
   Shield, 
   Calendar, 
   DollarSign, 
@@ -9,7 +8,8 @@ import {
   ArrowRight, 
   CheckCircle,
   AlertCircle,
-  X
+  X,
+  Flame
 } from 'lucide-react';
 import { submitToAirtable } from './utils/airtable';
 
@@ -61,7 +61,7 @@ function App() {
 
   const features = [
     {
-      icon: <Zap className="w-8 h-8" />,
+      icon: <Flame className="w-8 h-8" />,
       title: "Instant Response",
       description: "AI calls prospects within seconds of form submission, not hours or days later."
     },
@@ -176,121 +176,142 @@ function App() {
                 <span className="block gradient-text">Never Sleep</span>
               </h1>
                               <p className="text-xl text-gray-300 leading-relaxed">
-                  AI sales team that works 24/7 like they got a fire under their ass.
+                  AI sales team that has a 
+                  <span className="bg-gradient-to-r from-orange-400 via-red-500 to-red-600 bg-clip-text text-transparent font-bold text-2xl"> fire under their ass 24/7</span>.
+                  <br />
                   The moment a lead fills out your form, our AI agent calls them instantly. 
                   Validates prospects, books appointments, and closes deals. 
                   Built on NEPQ philosophy for maximum sales velocity.
                 </p>
               <div className="space-y-4">
                 <button onClick={scrollToForm} className="button-primary text-lg px-10 py-4">
-                  <Phone className="w-6 h-6 inline mr-2" />
+                  <Flame className="w-6 h-6 inline mr-2" />
                   See If We Can Close You
                 </button>
                 <p className="text-gray-400 text-sm">Fill out the form below to experience our AI in action</p>
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative w-full max-w-sm mx-auto">
-                {/* Phone Screen Mockup */}
-                <div className="relative">
-                  {/* Phone Frame */}
-                  <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-2 shadow-2xl">
-                    <div className="bg-black rounded-[2.5rem] overflow-hidden">
-                      {/* Screen Content */}
-                      <div className="bg-gradient-to-b from-dark-800 to-dark-900 h-[400px] flex flex-col justify-between p-6">
-                        
-                        {/* Top Status Bar */}
-                        <div className="flex justify-between items-center text-white text-sm">
-                          <span>9:41</span>
+              {/* Clean iPhone Rectangle with Centered Frame */}
+              <div className="relative w-[300px] h-[615px] mx-auto">
+                {/* iPhone Frame */}
+                <div className="w-full h-full bg-gradient-to-b from-gray-800 to-black rounded-[3.5rem] p-2 shadow-2xl">
+                  {/* Screen */}
+                  <div className="w-full h-full bg-black rounded-[2.8rem] relative overflow-hidden">
+                    <div className="bg-gradient-to-b from-gray-900 to-black w-full h-full flex flex-col justify-between p-6">
+                      
+                      {/* Dynamic Island */}
+                      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-black rounded-full z-20"></div>
+
+                      {/* Top Status Bar */}
+                      <div className="flex justify-between items-center text-white text-sm font-semibold mt-4">
+                        <span>9:41</span>
+                        <div className="flex items-center space-x-1">
                           <div className="flex space-x-1">
-                            <div className="w-4 h-2 bg-white rounded-sm"></div>
-                            <div className="w-4 h-2 bg-white rounded-sm"></div>
-                            <div className="w-4 h-2 bg-white rounded-sm"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                          </div>
+                          <div className="w-6 h-3 border border-white rounded-sm">
+                            <div className="w-full h-full bg-green-500 rounded-sm"></div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* Incoming Call UI */}
-                        <div className="flex-1 flex flex-col items-center justify-center space-y-6">
-                          <p className="text-white text-sm opacity-75">Incoming call</p>
-                          
-                          {/* Avatar */}
-                          <div className="relative">
-                            <div className="w-24 h-24 bg-gradient-to-br from-primary-400 to-accent-500 rounded-full flex items-center justify-center">
-                              <span className="text-white text-2xl font-bold">AI</span>
-                            </div>
-                            {/* Pulsing rings */}
-                            {[1, 2, 3].map((i) => (
-                              <motion.div
-                                key={i}
-                                className="absolute inset-0 border-2 border-primary-400 rounded-full"
-                                animate={{
-                                  scale: [1, 2, 2.5],
-                                  opacity: [0.6, 0.3, 0]
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                  delay: i * 0.4,
-                                }}
-                              />
-                            ))}
+                      {/* Incoming Call UI */}
+                      <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+                        <p className="text-white text-sm opacity-75">Incoming call</p>
+                        
+                        {/* Fire Avatar */}
+                        <div className="relative">
+                          <div className="w-24 h-24 bg-gradient-to-br from-orange-400 via-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                            <motion.div
+                              animate={{
+                                scale: [1, 1.1, 1],
+                                rotate: [0, 5, -5, 0]
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }}
+                            >
+                              <Flame className="w-10 h-10 text-white" />
+                            </motion.div>
                           </div>
-
-                          <div className="text-center">
-                            <h3 className="text-white text-xl font-semibold">Firely AI Agent</h3>
-                            <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
-                          </div>
-
-                          {/* Sound Wave Visualization */}
-                          <div className="flex items-center justify-center space-x-1">
-                            {[1, 2, 3, 4, 5].map((i) => (
-                              <motion.div
-                                key={i}
-                                className="w-1 bg-gradient-to-t from-primary-400 to-accent-500 rounded-full"
-                                style={{ height: '20px' }}
-                                animate={{
-                                  scaleY: [0.3, 1, 0.3],
-                                  opacity: [0.4, 1, 0.4]
-                                }}
-                                transition={{
-                                  duration: 1.2,
-                                  repeat: Infinity,
-                                  delay: i * 0.1,
-                                  ease: "easeInOut"
-                                }}
-                              />
-                            ))}
-                          </div>
+                          {/* Pulsing fire rings */}
+                          {[0, 1, 2].map((i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute inset-0 border-2 border-orange-400 rounded-full"
+                              animate={{
+                                scale: [1, 3],
+                                opacity: [0.6, 0]
+                              }}
+                              transition={{
+                                duration: 2.4,
+                                repeat: Infinity,
+                                delay: i * 0.8,
+                                ease: "linear"
+                              }}
+                            />
+                          ))}
                         </div>
 
-                        {/* Call Action Buttons */}
-                        <div className="flex justify-center space-x-12">
-                          <motion.div 
-                            className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center"
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <X className="w-8 h-8 text-white" />
-                          </motion.div>
-                          <motion.div 
-                            className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center"
-                            whileTap={{ scale: 0.95 }}
-                            animate={{
-                              scale: [1, 1.1, 1],
-                            }}
-                            transition={{
-                              duration: 1.5,
-                              repeat: Infinity,
-                            }}
-                          >
-                            <Phone className="w-8 h-8 text-white" />
-                          </motion.div>
+                        <div className="text-center">
+                          <h3 className="text-white text-xl font-semibold">Firely AI Agent</h3>
+                          <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
                         </div>
+
+                        {/* Fire Sound Wave Visualization */}
+                        <div className="flex items-center justify-center space-x-1">
+                          {[1, 2, 3, 4, 5].map((i) => (
+                            <motion.div
+                              key={i}
+                              className="w-1 bg-gradient-to-t from-orange-400 via-red-500 to-red-600 rounded-full"
+                              style={{ height: '20px' }}
+                              animate={{
+                                scaleY: [0.3, 1, 0.3],
+                                opacity: [0.4, 1, 0.4]
+                              }}
+                              transition={{
+                                duration: 1.2,
+                                repeat: Infinity,
+                                delay: i * 0.1,
+                                ease: "easeInOut"
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Call Action Buttons */}
+                      <div className="flex justify-center space-x-16 pb-8">
+                        <motion.div 
+                          className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center shadow-lg"
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <X className="w-10 h-10 text-white" />
+                        </motion.div>
+                        <motion.div 
+                          className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-lg"
+                          whileTap={{ scale: 0.95 }}
+                          animate={{
+                            scale: [1, 1.05, 1],
+                          }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                          }}
+                        >
+                          <Phone className="w-10 h-10 text-white" />
+                        </motion.div>
                       </div>
                     </div>
                   </div>
@@ -354,7 +375,7 @@ function App() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              How Firely.ai Works
+              How Firely AI Works
             </h2>
           </motion.div>
 
@@ -368,7 +389,7 @@ function App() {
                   viewport={{ once: true }}
                   className="text-center max-w-xs"
                 >
-                  <div className="w-20 h-20 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
                     <span className="text-2xl font-bold text-white">{step.number}</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
@@ -509,7 +530,7 @@ function App() {
                   ) : (
                     <>
                       <Phone className="w-6 h-6 inline mr-2" />
-                      Get AI Demo Call
+                      Get Your AI Demo Call
                     </>
                   )}
                 </button>

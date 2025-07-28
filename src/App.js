@@ -105,7 +105,7 @@ function App() {
           <nav className="hidden md:flex items-center space-x-8 text-text-subtle font-medium">
             <button onClick={() => scrollToSection('features')} className="hover:text-text transition-colors">Features</button>
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-text transition-colors">How It Works</button>
-            <button onClick={() => scrollToSection('contact')} className="hover:text-text transition-colors">Contact</button>
+            <button onClick={() => setShowFormPage(true)} className="hover:text-text transition-colors">Contact</button>
           </nav>
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-4">
@@ -158,7 +158,7 @@ function App() {
                 </button>
                 <button 
                   onClick={() => {
-                    scrollToSection('contact');
+                    setShowFormPage(true);
                     setMobileMenuOpen(false);
                   }}
                   className="block w-full text-left text-text hover:text-text-subtle transition-colors"

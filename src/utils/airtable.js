@@ -1,8 +1,13 @@
 import axios from 'axios';
 
-const AIRTABLE_BASE_ID = 'appw0Q45l5AXlUWqi';
-const AIRTABLE_TABLE_ID = 'tblxLdN8xZpOciLOt'; // Using table ID instead of name
-const AIRTABLE_API_KEY = 'pat47O2QYmuWzDvNB.59dc8f255c21cd7bda92692d77764696c14d639475b2be2ba9ba97ff6f95d4a3';
+const AIRTABLE_BASE_ID = process.env.REACT_APP_AIRTABLE_BASE_ID;
+const AIRTABLE_TABLE_ID = process.env.REACT_APP_AIRTABLE_TABLE_ID;
+const AIRTABLE_API_KEY = process.env.REACT_APP_AIRTABLE_API_KEY;
+
+// Check if environment variables are loaded
+if (!AIRTABLE_BASE_ID || !AIRTABLE_TABLE_ID || !AIRTABLE_API_KEY) {
+  console.error('Missing Airtable environment variables. Please check your .env file.');
+}
 
 const airtableAPI = axios.create({
   baseURL: `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}`,

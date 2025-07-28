@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { submitToAirtable } from './utils/airtable';
+// Removed direct Airtable import for security
 
 function FormPage({ onBack }) {
   const [formData, setFormData] = useState({
@@ -30,20 +30,28 @@ function FormPage({ onBack }) {
     setSubmitStatus(null);
 
     try {
-      // Convert phone to number and prepare data for Airtable
-      const airtableData = {
+      // Prepare data for secure serverless function
+      const submitData = {
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email,
-        phone_number: parseInt(formData.phone.replace(/\D/g, '')), // Remove non-digits and convert to number
+        phone_number: formData.phone.replace(/\D/g, ''), // Remove non-digits
         company_size: formData.companySize,
         sales_challenges: formData.salesChallenges,
-        // Status will be set to 'Pending' in the airtable.js file
       };
 
-      const result = await submitToAirtable(airtableData);
+      // Submit to secure Netlify function
+      const response = await fetch('/.netlify/functions/submit-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submitData),
+      });
+
+      const result = await response.json();
       
-      if (result.success) {
+      if (response.ok && result.success) {
         setSubmitStatus('success');
         // Clear form
         setFormData({

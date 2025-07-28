@@ -328,7 +328,7 @@ function FormPage({ onBack }) {
                     whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                   >
                     <span className="relative z-10 flex items-center justify-center space-x-2">
-                      <Phone size={20} fill="currentColor" />
+                      <Phone size={20} />
                       <span>{isSubmitting ? 'Submitting...' : 'Get Called by Mia Now'}</span>
                     </span>
                   </motion.button>

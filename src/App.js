@@ -206,43 +206,6 @@ function App() {
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="relative mb-6 md:mb-8"
           >
-            
-            {/* Signal Lines Coming from Bubble Edges */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {/* Top edge lines */}
-              <motion.div
-                className="absolute w-0.5 h-12 bg-gradient-to-t from-green-400 to-transparent origin-bottom"
-                style={{ transform: 'translateY(-60px) translateX(-60px)' }}
-                animate={{ opacity: [0, 1, 0], scaleY: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute w-0.5 h-12 bg-gradient-to-t from-green-400 to-transparent origin-bottom"
-                style={{ transform: 'translateY(-60px) translateX(0px)' }}
-                animate={{ opacity: [0, 1, 0], scaleY: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute w-0.5 h-12 bg-gradient-to-t from-green-400 to-transparent origin-bottom"
-                style={{ transform: 'translateY(-60px) translateX(60px)' }}
-                animate={{ opacity: [0, 1, 0], scaleY: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.6, ease: "easeInOut" }}
-              />
-              
-              {/* Side edge lines */}
-              <motion.div
-                className="absolute w-12 h-0.5 bg-gradient-to-r from-green-400 to-transparent origin-left"
-                style={{ transform: 'translateX(-170px) translateY(-10px)' }}
-                animate={{ opacity: [0, 1, 0], scaleX: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.2, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute w-12 h-0.5 bg-gradient-to-l from-green-400 to-transparent origin-right"
-                style={{ transform: 'translateX(170px) translateY(10px)' }}
-                animate={{ opacity: [0, 1, 0], scaleX: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.4, ease: "easeInOut" }}
-              />
-            </div>
 
             {/* Glass Bubble - Much Longer iPhone Style */}
             <div className="glass-bubble w-96 sm:w-[28rem] h-24 sm:h-28 flex items-center px-6 sm:px-10 relative mx-auto">
@@ -271,26 +234,13 @@ function App() {
                     className="call-button-decline"
                     whileTap={{ scale: 0.95 }}
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style={{ transform: 'rotate(135deg)' }}>
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                     </svg>
                   </motion.button>
                   <motion.button
-                    className="call-button-accept cursor-pointer relative"
+                    className="call-button-accept cursor-pointer"
                     whileTap={{ scale: 0.95 }}
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                      boxShadow: [
-                        "4px 4px 8px rgba(0, 0, 0, 0.3), -2px -2px 6px rgba(255, 255, 255, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.2), 0 0 0 rgba(34, 197, 94, 0.4)",
-                        "6px 6px 12px rgba(0, 0, 0, 0.4), -3px -3px 8px rgba(255, 255, 255, 0.15), inset 2px 2px 4px rgba(255, 255, 255, 0.25), inset -2px -2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.6)",
-                        "4px 4px 8px rgba(0, 0, 0, 0.3), -2px -2px 6px rgba(255, 255, 255, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.2), 0 0 0 rgba(34, 197, 94, 0.4)"
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      ease: "easeInOut" 
-                    }}
                     onClick={() => setShowFormPage(true)}
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

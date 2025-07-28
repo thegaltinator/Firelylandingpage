@@ -1,8 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, ArrowLeft } from 'lucide-react';
+import { submitToAirtable } from './utils/airtable';
 
 function FormPage({ onBack }) {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    companySize: '',
+    salesChallenges: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Convert phone to number and prepare data for Airtable
+      const airtableData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone_number: parseInt(formData.phone.replace(/\D/g, '')), // Remove non-digits and convert to number
+        company_size: formData.companySize,
+        sales_challenges: formData.salesChallenges,
+        // Status will be set to 'Pending' in the airtable.js file
+      };
+
+      const result = await submitToAirtable(airtableData);
+      
+      if (result.success) {
+        setSubmitStatus('success');
+        // Clear form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          company: '',
+          companySize: '',
+          salesChallenges: ''
+        });
+      } else {
+        setSubmitStatus('error');
+        console.error('Submission failed:', result.error);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen overflow-x-hidden relative flex flex-col justify-center items-center p-6">
       
@@ -122,35 +185,56 @@ function FormPage({ onBack }) {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="glass-bubble p-8 md:p-12 max-w-2xl mx-auto"
             >
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Name & Email Row */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
-                      Full Name *
+                    <label htmlFor="firstName" className="block text-sm font-medium text-text mb-2">
+                      First Name *
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      placeholder="Your name"
+                      placeholder="John"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-text mb-2">
-                      Email Address *
+                    <label htmlFor="lastName" className="block text-sm font-medium text-text mb-2">
+                      Last Name *
                     </label>
                     <input
-                      type="email"
-                      id="email"
-                      name="email"
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      placeholder="your@email.com"
+                      placeholder="Smith"
                     />
                   </div>
+                </div>
+
+                {/* Email Row */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-text mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                    placeholder="your@email.com"
+                  />
                 </div>
 
                 {/* Phone & Company Row */}
@@ -163,6 +247,8 @@ function FormPage({ onBack }) {
                       type="tel"
                       id="phone"
                       name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       placeholder="(555) 123-4567"
@@ -176,6 +262,8 @@ function FormPage({ onBack }) {
                       type="text"
                       id="company"
                       name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       placeholder="Your company"
                     />
@@ -184,12 +272,14 @@ function FormPage({ onBack }) {
 
                 {/* Company Size */}
                 <div>
-                  <label htmlFor="company-size" className="block text-sm font-medium text-text mb-2">
+                  <label htmlFor="companySize" className="block text-sm font-medium text-text mb-2">
                     Company Size
                   </label>
                   <select
-                    id="company-size"
-                    name="company-size"
+                    id="companySize"
+                    name="companySize"
+                    value={formData.companySize}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="">Select company size</option>
@@ -200,14 +290,16 @@ function FormPage({ onBack }) {
                   </select>
                 </div>
 
-                {/* Message */}
+                {/* Sales Challenges */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-text mb-2">
+                  <label htmlFor="salesChallenges" className="block text-sm font-medium text-text mb-2">
                     Tell us about your sales challenges (optional)
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
+                    id="salesChallenges"
+                    name="salesChallenges"
+                    value={formData.salesChallenges}
+                    onChange={handleInputChange}
                     rows={4}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-text placeholder-text-subtle/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm resize-none"
                     placeholder="What sales challenges are you facing? What's your current lead volume?"
@@ -216,15 +308,28 @@ function FormPage({ onBack }) {
 
                 {/* Submit Button */}
                 <div className="text-center pt-4">
+                  {submitStatus === 'success' && (
+                    <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                      🎉 Success! Mia will call you within 60 seconds.
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                      ❌ Something went wrong. Please try again or contact support.
+                    </div>
+                  )}
+
                   <motion.button
                     type="submit"
-                    className="button-primary-neumorphic text-lg py-4 px-12 w-full md:w-auto"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={isSubmitting}
+                    className={`button-primary-neumorphic text-lg py-4 px-12 w-full md:w-auto ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                   >
                     <span className="relative z-10 flex items-center justify-center space-x-2">
-                      <Phone size={20} />
-                      <span>Get Called by Mia Now</span>
+                      <Phone size={20} fill="currentColor" />
+                      <span>{isSubmitting ? 'Submitting...' : 'Get Called by Mia Now'}</span>
                     </span>
                   </motion.button>
                   <p className="text-xs text-text-subtle mt-3">

@@ -29,11 +29,12 @@ export const submitToAirtable = async (formData) => {
       "records": [
         {
           "fields": {
-            'first_name': formData.firstName,
-            'last_name': formData.lastName,
+            'first_name': formData.first_name,
+            'last_name': formData.last_name,
             'email': formData.email,
-            'phone_number': formData.phoneNumber,
-            'company_size': formData.company,
+            'phone_number': formData.phone_number,
+            'company_size': formData.company_size,
+            'sales_challenges': formData.sales_challenges,
             'Status': 'Pending'
           }
         }

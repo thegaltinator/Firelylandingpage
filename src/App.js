@@ -557,9 +557,10 @@ function App() {
 
           {/* Bottom Bar */}
           <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-text-subtle text-sm">
-              © 2024 Firely.ai. All rights reserved.
-            </p>
+            <div className="text-text-subtle text-sm">
+              <p>© 2024 Firely.ai. All rights reserved.</p>
+              <p>an Aman Rahmani production</p>
+            </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <button className="text-text-subtle hover:text-text transition-colors text-sm">Terms</button>
               <button className="text-text-subtle hover:text-text transition-colors text-sm">Privacy</button>

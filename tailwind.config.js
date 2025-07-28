@@ -6,93 +6,87 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        },
-        accent: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-        },
-        fire: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
-        },
-        dark: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#1e293b',
-          800: '#0f172a',
-          900: '#020617',
-        }
+        'background-start': '#e0e8ff',
+        'background-end': '#f0f4ff',
+        text: '#111827',
+        'text-subtle': '#6b7280',
+        'glass-bg': 'rgba(255, 255, 255, 0.15)', // Proper glassmorphic opacity
+        'glass-border': 'rgba(255, 255, 255, 0.2)', // Proper glassmorphic border
+        'blue-dance': 'rgba(59, 130, 246, 0.18)',  // Boosted more for better visibility
+        'blue-dance-alt': 'rgba(96, 165, 250, 0.15)',  // Increased visibility
+        'purple-dance': 'rgba(147, 51, 234, 0.12)',  // Enhanced purple
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'gradient': 'gradient 8s linear infinite',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.5s ease-out',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'blue-dance-1': 'blueDance1 25s infinite ease-in-out', // Slower for subtle effect
+        'blue-dance-2': 'blueDance2 30s infinite ease-in-out',
+        'blue-dance-3': 'blueDance3 28s infinite ease-in-out',
+        'purple-dance': 'purpleDance 35s infinite ease-in-out',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        gradient: {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        blueDance1: {
+          '0%, 100%': { 
+            transform: 'translate(0px, 0px) scale(0.8)', 
+            opacity: '0.4' 
           },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
+          '33%': { 
+            transform: 'translate(20px, -15px) scale(1.2)', 
+            opacity: '0.6' 
+          },
+          '66%': { 
+            transform: 'translate(-15px, 20px) scale(0.9)', 
+            opacity: '0.5' 
           },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        blueDance2: {
+          '0%, 100%': { 
+            transform: 'translate(0px, 0px) scale(1)', 
+            opacity: '0.35' 
+          },
+          '50%': { 
+            transform: 'translate(-25px, -10px) scale(1.3)', 
+            opacity: '0.5' 
+          },
         },
-        slideDown: {
-          '0%': { transform: 'translateY(-100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        blueDance3: {
+          '0%, 100%': { 
+            transform: 'translate(0px, 0px) scale(0.7)', 
+            opacity: '0.4' 
+          },
+          '25%': { 
+            transform: 'translate(15px, 25px) scale(1.1)', 
+            opacity: '0.35' 
+          },
+          '75%': { 
+            transform: 'translate(-10px, -20px) scale(0.8)', 
+            opacity: '0.5' 
+          },
         },
+        purpleDance: {
+          '0%, 100%': { 
+            transform: 'translate(0px, 0px) scale(1)', 
+            opacity: '0.25' 
+          },
+          '30%': { 
+            transform: 'translate(-20px, 15px) scale(0.8)', 
+            opacity: '0.4' 
+          },
+          '70%': { 
+            transform: 'translate(25px, -10px) scale(1.2)', 
+            opacity: '0.3' 
+          },
+        }
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.15)', // Proper glassmorphic shadow
       },
+      backdropBlur: {
+        'glass': '10px', // Standard glassmorphic blur
+      }
     },
   },
   plugins: [],

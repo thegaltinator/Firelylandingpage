@@ -293,7 +293,7 @@ function App() {
                     }}
                     onClick={() => setShowFormPage(true)}
                   >
-                    <Phone size={20} />
+                    <Phone size={20} fill="white" />
                   </motion.button>
                 </div>
               </div>

@@ -26,14 +26,14 @@ function App() {
       {/* Background Tie-Dye Color Splotches */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          className="absolute top-1/4 left-1/5 w-32 h-24 bg-blue-400 filter blur-3xl opacity-35"
+          className="absolute top-1/4 left-1/5 w-40 h-32 bg-blue-400 filter blur-3xl opacity-50"
           style={{ 
             borderRadius: '60% 40% 70% 30% / 50% 60% 40% 50%',
             transform: 'rotate(15deg)'
           }}
           animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.35, 0.45, 0.35],
+            scale: [1, 1.4, 1],
+            opacity: [0.50, 0.65, 0.50],
             rotate: [15, 25, 15]
           }}
           transition={{
@@ -43,14 +43,14 @@ function App() {
           }}
         />
         <motion.div
-          className="absolute top-3/4 right-1/4 w-40 h-28 bg-purple-500 filter blur-3xl opacity-30"
+          className="absolute bottom-1/4 right-1/5 w-48 h-36 bg-purple-500 filter blur-3xl opacity-45"
           style={{ 
             borderRadius: '45% 55% 65% 35% / 60% 40% 60% 40%',
             transform: 'rotate(-20deg)'
           }}
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.30, 0.40, 0.30],
+            scale: [1, 1.3, 1],
+            opacity: [0.45, 0.60, 0.45],
             rotate: [-20, -10, -20]
           }}
           transition={{
@@ -61,14 +61,14 @@ function App() {
           }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-1/3 w-28 h-32 bg-pink-400 filter blur-3xl opacity-33"
+          className="absolute bottom-1/3 left-1/3 w-36 h-40 bg-pink-400 filter blur-3xl opacity-48"
           style={{ 
             borderRadius: '70% 30% 50% 50% / 40% 70% 30% 60%',
             transform: 'rotate(45deg)'
           }}
           animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.33, 0.43, 0.33],
+            scale: [1, 1.5, 1],
+            opacity: [0.48, 0.63, 0.48],
             rotate: [45, 55, 45]
           }}
           transition={{
@@ -79,14 +79,14 @@ function App() {
           }}
         />
         <motion.div
-          className="absolute top-1/3 right-1/3 w-24 h-20 bg-cyan-400 filter blur-3xl opacity-31"
+          className="absolute top-2/3 right-1/6 w-32 h-28 bg-cyan-400 filter blur-3xl opacity-46"
           style={{ 
             borderRadius: '55% 45% 40% 60% / 65% 35% 65% 35%',
             transform: 'rotate(-30deg)'
           }}
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.31, 0.39, 0.31],
+            scale: [1, 1.2, 1],
+            opacity: [0.46, 0.58, 0.46],
             rotate: [-30, -20, -30]
           }}
           transition={{

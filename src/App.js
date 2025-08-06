@@ -188,34 +188,32 @@ function App() {
       {/* Main Content */}
       <main className="w-full flex flex-col justify-center items-center text-center space-y-8 md:space-y-12 pt-16 md:pt-20 pb-12 md:pb-16">
         
-        {/* Copy Section - Outside the bubble */}
+        {/* Hero Section - Properly Spaced */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl w-full"
+          className="max-w-4xl w-full space-y-12 md:space-y-16"
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-text mb-6 md:mb-8 px-4">
+          {/* Main Headline */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-text text-center px-4">
             An AI sales team that sells like it has a fire under its ass 24/7
           </h1>
           
-          {/* iPhone-Style Call Interface - Moved between headline and subheadline */}
+          {/* iPhone-Style Call Interface */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mb-6 md:mb-8"
+            className="relative"
           >
-
-            {/* Glass Bubble - Much Longer iPhone Style */}
+            {/* Glass Bubble - iPhone Style */}
             <div className="glass-bubble w-96 sm:w-[28rem] h-24 sm:h-28 flex items-center px-6 sm:px-10 relative mx-auto">
-              
               {/* iPhone Call Content */}
               <div className="flex items-center justify-between w-full relative z-10">
                 {/* M Avatar - Left */}
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg relative">
                   M
-                  
                   {/* Water ripple rings emanating from M avatar center */}
                   <div className="ripple ripple-1" />
                   <div className="ripple ripple-2" />
@@ -252,19 +250,38 @@ function App() {
             </div>
           </motion.div>
           
-          <p className="text-base md:text-lg text-text-subtle max-w-2xl mx-auto mb-6 md:mb-8 leading-relaxed px-4">
-            Never tired, no sick days. Just relentless performance.
-            Firely's AI agent engages, qualifies, and books meetings the second a lead comes in.
+          {/* Description Text */}
+          <div className="text-center space-y-8">
+            <p className="text-base md:text-lg text-text-subtle max-w-2xl mx-auto leading-relaxed px-4">
+              We build custom AI voice agents that sound exactly like your best closer.
+              <br />They take sales calls, handle objections, and close deals 24/7—never tired, never off-script.
+            </p>
+            
+            {/* CTA Button */}
+            <motion.button 
+              className="button-primary-neumorphic text-lg py-4 px-8 relative overflow-hidden group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowFormPage(true)}
+            >
+              <span className="relative z-10">Get Called by Mia</span>
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* Beta Offer Section - Clean */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center space-y-4 mt-16 md:mt-20 max-w-3xl mx-auto px-4"
+        >
+          <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+            Limited Beta Access
           </p>
-          
-          <motion.button 
-            className="button-primary-neumorphic text-lg py-4 px-8 relative overflow-hidden group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setShowFormPage(true)}
-          >
-            <span className="relative z-10">Let's Book a Demo</span>
-          </motion.button>
+          <p className="text-xl md:text-2xl text-gray-900 leading-relaxed font-medium">
+            100% commission-based with no upfront costs or setup fees.
+          </p>
         </motion.div>
 
 
@@ -277,35 +294,29 @@ function App() {
           className="max-w-5xl mt-8 md:mt-12 space-y-8 md:space-y-12 px-4"
         >
           {/* Benefits Grid */}
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
-            <div className="space-y-4">
-              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+            {/* Benefits 1 & 2 */}
+            <div className="space-y-8">
+              <div className="text-left">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Instant Response</h3>
+                <p className="text-gray-600 leading-relaxed">Connect with leads in under 30 seconds. No delays, no missed opportunities.</p>
               </div>
-              <h3 className="text-xl font-bold text-text text-center">Lightning Fast Response</h3>
-              <p className="text-text-subtle">Connect with leads in under 30 seconds. Strike while the iron's hot and capture interest at its peak.</p>
+              
+              <div className="text-left">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Perfect Qualification</h3>
+                <p className="text-gray-600 leading-relaxed">Asks discovery questions that identify real buyers and filter out tire-kickers.</p>
+              </div>
             </div>
-            
-            <div className="space-y-4">
-              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+
+            {/* Benefit 3 */}
+            <div className="space-y-8">
+              <div className="text-left">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Revenue Growth</h3>
+                <p className="text-gray-600 leading-relaxed">Close deals while you sleep. Scale without hiring more sales reps.</p>
               </div>
-              <h3 className="text-xl font-bold text-text text-center">Smart Qualification</h3>
-              <p className="text-text-subtle">Our AI asks the right questions to identify serious buyers and filter out time-wasters automatically.</p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-text text-center">Revenue on Autopilot</h3>
-              <p className="text-text-subtle">Close smaller deals instantly and book high-value prospects with your best closers automatically.</p>
             </div>
           </div>
 
@@ -329,8 +340,77 @@ function App() {
             </div>
           </div>
 
-
         </motion.div>
+        </section>
+
+        {/* How We Get You Ready Section */}
+        <section className="w-full py-16 md:py-24">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center mb-12 md:mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-6">
+                How We Build Your Sales Agent
+              </h2>
+              <p className="text-lg md:text-xl text-text-subtle max-w-3xl mx-auto">
+                We clone your best closer's voice and methodology to create an AI that sells exactly like them.
+              </p>
+            </motion.div>
+
+            {/* Setup Steps */}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+              {/* Step 1 & 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Voice Clone</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Record your best closer's voice or choose from our library of proven sales profiles that convert.
+                  </p>
+                </div>
+                
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Script Setup</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Upload your existing script or we create NEPQ-style discovery flows that uncover real buying intent.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Step 3 & 4 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-8"
+              >
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Systems Integration</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Connect your CRM, payment processor, and calendar. Everything syncs automatically.
+                  </p>
+                </div>
+                
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Launch & Scale</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Go live with your AI closer and start converting leads while you focus on high-value activities.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </section>
 
         {/* How It Works Section */}
@@ -351,67 +431,43 @@ function App() {
             </motion.div>
 
             {/* Process Steps */}
-            <div className="grid md:grid-cols-3 gap-8 md:gap-8">
-              {/* Step 1 */}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+              {/* Step 1 & 2 */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="relative"
+                className="space-y-8"
               >
-                <div className="glass-bubble p-8 text-center h-full relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl relative">
-                    1
-                    {/* Small ripple for visual interest */}
-                    <div className="absolute inset-0 border-2 border-blue-400 rounded-full opacity-0 animate-ping"></div>
-                  </div>
-                  <h3 className="text-xl font-bold text-text mb-4">Lead Capture</h3>
-                  <p className="text-text-subtle">
-                    The moment someone fills out your form, Mia receives an instant alert with their information and intent level.
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Instant Capture</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Lead submits form → Mia gets instant alert with their info and buying intent signals.
                   </p>
                 </div>
-                {/* Connection Line */}
-                <div className="hidden md:block absolute top-1/2 left-full w-8 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transform -translate-y-1/2 z-0"></div>
-              </motion.div>
-
-              {/* Step 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="relative"
-              >
-                <div className="glass-bubble p-8 text-center h-full relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-2xl relative">
-                    2
-                    {/* Small ripple for visual interest */}
-                    <div className="absolute inset-0 border-2 border-green-400 rounded-full opacity-0 animate-ping animation-delay-500"></div>
-                  </div>
-                  <h3 className="text-xl font-bold text-text mb-4">Instant Contact</h3>
-                  <p className="text-text-subtle">
-                    Within 30 seconds, Mia calls the prospect with a personalized approach based on their form responses and behavior.
+                
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Perfect Pitch</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Mia calls within 30 seconds, sounds exactly like your best closer, follows your proven script.
                   </p>
                 </div>
-                {/* Connection Line */}
-                <div className="hidden md:block absolute top-1/2 left-full w-8 h-0.5 bg-gradient-to-r from-green-400 to-orange-500 transform -translate-y-1/2 z-0"></div>
               </motion.div>
 
               {/* Step 3 */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="relative"
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-8"
               >
-                <div className="glass-bubble p-8 text-center h-full relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-2xl relative">
-                    3
-                    {/* Small ripple for visual interest */}
-                    <div className="absolute inset-0 border-2 border-orange-400 rounded-full opacity-0 animate-ping animation-delay-1000"></div>
-                  </div>
-                  <h3 className="text-xl font-bold text-text mb-4">Close or Book</h3>
-                  <p className="text-text-subtle">
-                    Mia either closes the deal on the spot for smaller tickets or books a meeting with your best closer for high-value prospects.
+                <div className="text-left">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Close & Convert</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Takes payment for smaller deals or books qualified prospects with your closers automatically.
                   </p>
                 </div>
               </motion.div>

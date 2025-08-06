@@ -297,14 +297,14 @@ function App() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
             {/* Benefits 1 & 2 */}
             <div className="space-y-8">
-              <div className="text-left">
-                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+              <div className="text-center">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Instant Response</h3>
                 <p className="text-gray-600 leading-relaxed">Connect with leads in under 30 seconds. No delays, no missed opportunities.</p>
               </div>
               
-              <div className="text-left">
-                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+              <div className="text-center">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Perfect Qualification</h3>
                 <p className="text-gray-600 leading-relaxed">Asks discovery questions that identify real buyers and filter out tire-kickers.</p>
               </div>
@@ -312,8 +312,8 @@ function App() {
 
             {/* Benefit 3 */}
             <div className="space-y-8">
-              <div className="text-left">
-                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+              <div className="text-center">
+                <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Revenue Growth</h3>
                 <p className="text-gray-600 leading-relaxed">Close deals while you sleep. Scale without hiring more sales reps.</p>
               </div>
@@ -369,16 +369,16 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-8"
               >
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Voice Clone</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Record your best closer's voice or choose from our library of proven sales profiles that convert.
                   </p>
                 </div>
                 
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Script Setup</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Upload your existing script or we create NEPQ-style discovery flows that uncover real buying intent.
@@ -393,16 +393,16 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-8"
               >
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Systems Integration</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Connect your CRM, payment processor, and calendar. Everything syncs automatically.
                   </p>
                 </div>
                 
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Launch & Scale</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Go live with your AI closer and start converting leads while you focus on high-value activities.
@@ -439,16 +439,16 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-8"
               >
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Instant Capture</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Lead submits form → Mia gets instant alert with their info and buying intent signals.
                   </p>
                 </div>
                 
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Perfect Pitch</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Mia calls within 30 seconds, sounds exactly like your best closer, follows your proven script.
@@ -463,8 +463,8 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-8"
               >
-                <div className="text-left">
-                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4"></div>
+                <div className="text-center">
+                  <div className="w-3 h-12 bg-gray-800 rounded-full mb-4 mx-auto"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Close & Convert</h3>
                   <p className="text-gray-600 leading-relaxed">
                     Takes payment for smaller deals or books qualified prospects with your closers automatically.
